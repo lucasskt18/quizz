@@ -32,6 +32,34 @@
             overflow: hidden;
         }
 
+        .quiz-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .quiz-header-logo {
+            max-width: 250px;
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-header-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .results-screen .quiz-header {
+            border-bottom: none;
+            margin-bottom: 10px;
+            padding-bottom: 0;
+        }
+
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -190,6 +218,20 @@
             word-wrap: break-word;
         }
 
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            max-width: 300px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
         .start-screen {
             text-align: center;
         }
@@ -299,12 +341,15 @@
             const container = document.getElementById('quizContainer');
             container.innerHTML = `
                 <div class="start-screen">
-                    <h1 class="start-title">📖 Mulheres na Bíblia</h1>
+                    <div class="logo-container">
+                        <img src="assets/WhatsApp Image 2025-10-26 at 09.18.04_fd777bb4.jpg" alt="Logo" class="logo" />
+                    </div>
+                    <h1 class="start-title">📖 Quiz: Mulheres na Bíblia</h1>
                     <p class="start-description">
-                        Teste seus conhecimentos sobre as importantes mulheres<br>
-                        que marcaram a história bíblica!<br><br>
-                        Você terá ${questions.length} perguntas para responder.<br>
-                        Boa sorte!
+                        Descubra e teste seus conhecimentos sobre as mulheres corajosas<br>
+                        e inspiradoras que fizeram história na Bíblia!<br><br>
+                        Você terá ${questions.length} perguntas sobre fé, coragem e fidelidade.<br>
+                        Responda com atenção e boa sorte! 🍀
                     </p>
                     <button class="btn btn-primary" onclick="startQuiz()">
                         Iniciar Quiz
@@ -325,6 +370,9 @@
 
             const container = document.getElementById('quizContainer');
             container.innerHTML = `
+                <div class="quiz-header">
+                    <img src="assets/WhatsApp Image 2025-10-26 at 09.18.04_fd777bb4.jpg" alt="Logo" class="quiz-header-logo" />
+                </div>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: ${progress}%"></div>
                 </div>
@@ -410,6 +458,9 @@
             container.classList.add('results-screen');
             container.innerHTML = `
                 <div class="results-screen">
+                    <div class="quiz-header">
+                        <img src="assets/WhatsApp Image 2025-10-26 at 09.18.04_fd777bb4.jpg" alt="Logo" class="quiz-header-logo" />
+                    </div>
                     <h1 class="results-title">🎯 Resultado Final</h1>
                     <div class="score">${score}/${questions.length}</div>
                     <div class="score-text">${percentage}% de acertos</div>
