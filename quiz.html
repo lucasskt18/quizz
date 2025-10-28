@@ -25,9 +25,9 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
-            padding: 40px;
+            padding: 40px 50px;
             position: relative;
             overflow: hidden;
         }
@@ -84,33 +84,42 @@
         }
 
         .question-text {
-            font-size: 28px;
+            font-size: 32px;
             color: #333;
-            margin-bottom: 30px;
-            line-height: 1.4;
+            margin-bottom: 35px;
+            line-height: 1.5;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .option {
-            padding: 20px;
+            padding: 25px;
+            min-height: 70px;
             background: #f8f9fa;
             border: 3px solid #e0e0e0;
             border-radius: 12px;
             cursor: pointer;
+            touch-action: manipulation;
             transition: all 0.3s ease;
-            font-size: 18px;
+            font-size: 20px;
             color: #333;
+            display: flex;
+            align-items: center;
         }
 
         .option:hover {
             background: #e9ecef;
             border-color: #667eea;
             transform: translateX(5px);
+        }
+
+        .option:active {
+            transform: scale(0.98);
+            background: #dee2e6;
         }
 
         .option.selected {
@@ -139,13 +148,16 @@
         }
 
         .btn {
-            padding: 15px 40px;
-            font-size: 18px;
+            padding: 20px 50px;
+            min-height: 60px;
+            font-size: 20px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            touch-action: manipulation;
             transition: all 0.3s ease;
             font-weight: 600;
+            min-width: 150px;
         }
 
         .btn-primary {
@@ -156,6 +168,10 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
         }
 
         .btn-primary:disabled {
