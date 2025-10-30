@@ -219,6 +219,68 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        
+        /* === KIOSK / LARGE DISPLAY SCALING LAYER === */
+        :root {
+            --scale: clamp(14px, 1.2vmin + 0.6vw, 24px);
+            --container-max: min(92vw, 1400px);
+        }
+
+        html, body {
+            font-size: var(--scale);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .quiz-container {
+            max-width: var(--container-max);
+            padding: clamp(1rem, 2vmin, 3rem) clamp(1rem, 3vmin, 3rem);
+            border-radius: clamp(12px, 1.2vmin, 20px);
+        }
+
+        .progress-bar { height: clamp(8px, 1vmin, 14px); }
+
+        .question-number { font-size: clamp(1rem, 2.2vmin, 1.4rem); }
+        .question-text { font-size: clamp(1.4rem, 3.2vmin, 2.4rem); }
+
+        .options { gap: clamp(0.75rem, 2vmin, 1.5rem); }
+
+        .option {
+            font-size: clamp(1rem, 2.5vmin, 1.5rem);
+            padding: clamp(1rem, 2.4vmin, 2rem);
+            min-height: clamp(3rem, 6vmin, 5rem);
+            border-width: clamp(2px, 0.4vmin, 4px);
+            border-radius: clamp(10px, 1.4vmin, 16px);
+        }
+
+        .navigation { margin-top: clamp(1rem, 2.5vmin, 2rem); }
+
+        .btn {
+            font-size: clamp(1rem, 2.6vmin, 1.5rem);
+            padding: clamp(0.8rem, 2.4vmin, 1.6rem) clamp(1.6rem, 4vmin, 3.2rem);
+            min-height: clamp(3rem, 6vmin, 4.5rem);
+            min-width: clamp(8rem, 16vmin, 12rem);
+            border-radius: clamp(10px, 1.2vmin, 14px);
+        }
+
+        .results-title { font-size: clamp(1.6rem, 3.4vmin, 2.4rem); }
+        .score { font-size: clamp(2.5rem, 8vmin, 5rem); }
+        .score-text { font-size: clamp(1.1rem, 2.6vmin, 1.6rem); }
+        .message {
+            font-size: clamp(1rem, 2.2vmin, 1.25rem);
+            padding: clamp(0.8rem, 2vmin, 1.4rem);
+        }
+
+        .start-title { font-size: clamp(1.8rem, 4.2vmin, 3rem); }
+        .start-description { font-size: clamp(1rem, 2.4vmin, 1.25rem); }
+        .timer { font-size: clamp(1rem, 2.6vmin, 1.5rem); }
+
+        @media (orientation: portrait) {
+            .quiz-container { max-width: 96vw; }
+            .options { gap: clamp(0.75rem, 3vmin, 2rem); }
+        }
     </style>
 </head>
 <body>
@@ -273,8 +335,82 @@
         let timeLeft = 0;
         let timerInterval = null;
 
+        // === PREVIEW (Simulação de TV) ===
+        let previewConfig = null;
+
+        function parsePreviewParam() {
+            const params = new URLSearchParams(location.search);
+            const p = params.get('preview');
+            if (!p) return null;
+            const m = p.match(/^(\d+)x(\d+)$/i);
+            if (!m) return null;
+            const targetWidth = parseInt(m[1], 10);
+            const targetHeight = parseInt(m[2], 10);
+            return { targetWidth, targetHeight };
+        }
+
+        function ensurePreviewStage() {
+            let stage = document.getElementById('previewStage');
+            if (!stage) {
+                stage = document.createElement('div');
+                stage.id = 'previewStage';
+                stage.style.position = 'fixed';
+                stage.style.inset = '0';
+                stage.style.background = '#0b0b0f';
+                stage.style.display = 'flex';
+                stage.style.alignItems = 'center';
+                stage.style.justifyContent = 'center';
+                stage.style.padding = '16px';
+                stage.style.zIndex = '999';
+                document.body.appendChild(stage);
+            }
+            let frame = document.getElementById('previewFrame');
+            if (!frame) {
+                frame = document.createElement('div');
+                frame.id = 'previewFrame';
+                frame.style.position = 'relative';
+                frame.style.overflow = 'hidden';
+                frame.style.background = 'transparent';
+                frame.style.boxShadow = '0 20px 60px rgba(0,0,0,0.6)';
+                frame.style.borderRadius = '18px';
+                stage.appendChild(frame);
+            }
+            return { stage, frame };
+        }
+
+        function mountQuizIntoFrame() {
+            const frame = document.getElementById('previewFrame');
+            const quiz = document.getElementById('quizContainer');
+            if (frame && quiz && quiz.parentElement !== frame) {
+                frame.appendChild(quiz);
+            }
+        }
+
+        function updatePreviewScale() {
+            if (!previewConfig) return;
+            const { targetWidth, targetHeight } = previewConfig;
+            const { frame } = ensurePreviewStage();
+            frame.style.width = targetWidth + 'px';
+            frame.style.height = targetHeight + 'px';
+            const scaleX = (window.innerWidth - 32) / targetWidth;
+            const scaleY = (window.innerHeight - 32) / targetHeight;
+            const scale = Math.min(scaleX, scaleY);
+            frame.style.transform = `scale(${scale})`;
+            frame.style.transformOrigin = 'center center';
+        }
+
+        function setupPreviewIfRequested() {
+            previewConfig = parsePreviewParam();
+            if (!previewConfig) return;
+            ensurePreviewStage();
+            mountQuizIntoFrame();
+            updatePreviewScale();
+            window.addEventListener('resize', updatePreviewScale);
+        }
+
         // Inicializa o quiz
         function initQuiz() {
+            setupPreviewIfRequested();
             showStartScreen();
         }
 
