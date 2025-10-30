@@ -285,11 +285,9 @@
 </head>
 <body>
     <div class="quiz-container" id="quizContainer">
-        <!-- Tela de início será inserida aqui -->
     </div>
 
     <script>
-        // PERGUNTAS DO QUIZ - Mulheres na Bíblia
         const questions = [
             {
                 question: "Quem foi a primeira mulher criada por Deus?",
@@ -327,19 +325,19 @@
                 correct: 0
             },
             {
-                question: "Qual mulher é lembrada por sua fidelidade e famosa frase: 'O teu povo é o meu povo, o teu Deus é o meu Deus'?",
-                options: ["Ester", "Rute", "Marta", "Abigail"],
+                question: "\"Cobrir de violência as suas vestes\" descreve quem se envolve em atos cruéis como se vestisse a violência. Em qual livro Deus diz que odeia quem faz isso?",
+                options: ["Deuteronômio", "Malaquias", "Juízes", "Levítico"],
                 correct: 1
             },
             {
-                question: "Quem foi a irmã de Moisés que, junto com ele e Arão, liderou o povo?",
-                options: ["Mical", "Miriã", "Débora", "Rebeca"],
-                correct: 1
+                question: "Qual mulher é citada como construtora notável na Bíblia?",
+                options: ["Jael", "Mulher de Manoá", "Zilpa", "Seerá"],
+                correct: 3
             },
             {
-                question: "Qual mulher ficou conhecida por distrair Sansão e revelar o segredo de sua força?",
-                options: ["Dalila", "Raquel", "Jezabel", "Tamar"],
-                correct: 0
+                question: "O direito de herdar foi concedido às mulheres em 1405-1406 a.C. Em qual livro isso está registrado?",
+                options: ["Levítico", "Números", "Juízes", "Deuteronômio"],
+                correct: 1
             }
         ];
 
@@ -348,7 +346,6 @@
         let timeLeft = 0;
         let timerInterval = null;
 
-        // Inicializa o quiz
         function initQuiz() {
             showStartScreen();
         }
@@ -384,6 +381,8 @@
             const question = questions[currentQuestion];
             const progress = ((currentQuestion + 1) / questions.length) * 100;
 
+            const previouslySelected = answers[currentQuestion];
+
             const container = document.getElementById('quizContainer');
             container.innerHTML = `
                 <div class="quiz-header">
@@ -396,7 +395,7 @@
                 <div class="question-text">${question.question}</div>
                 <div class="options" id="options">
                     ${question.options.map((option, index) => `
-                        <div class="option" onclick="selectOption(${index})">
+                        <div class="option${previouslySelected === index ? ' selected' : ''}" onclick="selectOption(${index})">
                             ${String.fromCharCode(65 + index)}) ${option}
                         </div>
                     `).join('')}
@@ -405,7 +404,7 @@
                     <button class="btn" onclick="previousQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
                         ← Anterior
                     </button>
-                    <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn" disabled>
+                    <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn" ${previouslySelected !== undefined ? '' : 'disabled'}>
                         ${currentQuestion === questions.length - 1 ? 'Finalizar' : 'Próxima →'}
                     </button>
                 </div>
@@ -415,7 +414,6 @@
         function selectOption(index) {
             answers[currentQuestion] = index;
             
-            // Marca a opção selecionada
             const options = document.querySelectorAll('.option');
             options.forEach((opt, i) => {
                 if (i === index) {
@@ -425,7 +423,6 @@
                 }
             });
 
-            // Habilita botão próximo
             document.getElementById('nextBtn').disabled = false;
         }
 
@@ -461,7 +458,7 @@
             
             let message = "";
             if (percentage === 100) {
-                message = "🎉 Parabéns! Você ganhou acesso imediato e gratuito ao E-Book \"Romper o Silêncio\" e a nossa Ecobag.";
+                message = "🎉 Parabéns você acertou tudo! Retire seu brinde na sala de recepção.";
             } else if (percentage >= 70) {
                 message = "👍 Muito bem! Ótimo desempenho!";
             } else if (percentage >= 50) {
@@ -487,7 +484,6 @@
                 </div>
             `;
 
-            // Salva resultado no localStorage
             saveResults(score, percentage);
         }
 
@@ -500,11 +496,9 @@
                 percentage: percentage
             };
 
-            // Busca resultados anteriores
             let results = JSON.parse(localStorage.getItem('quizResults') || '[]');
             results.push(result);
             
-            // Mantém apenas os últimos 100 resultados
             if (results.length > 100) {
                 results = results.slice(-100);
             }
@@ -512,7 +506,6 @@
             localStorage.setItem('quizResults', JSON.stringify(results));
         }
 
-        // Inicia o quiz quando a página carregar
         initQuiz();
     </script>
 </body>
