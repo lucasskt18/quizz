@@ -395,6 +395,8 @@
             -webkit-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            overscroll-behavior: none;
+            touch-action: manipulation;
         }
 
         .quiz-container {
@@ -448,9 +450,10 @@
         .timer { font-size: clamp(1rem, 2.6vmin, 1.5rem); }
 
         @media (orientation: portrait) {
-            .quiz-container { max-width: 96vw; }
+            .quiz-container { max-width: 96vw; min-height: 88vh; }
             .options { gap: clamp(0.75rem, 3vmin, 2rem); }
         }
+        img { -webkit-user-drag: none; }
     </style>
 </head>
 <body>
@@ -588,10 +591,10 @@
             window.addEventListener('resize', updatePreviewScale);
         }
 
-        // Inicializa o quiz
         function initQuiz() {
             setupPreviewIfRequested();
             showStartScreen();
+            setupKioskGuards();
         }
 
         function showStartScreen() {
@@ -766,6 +769,33 @@
             }
             
             localStorage.setItem('quizResults', JSON.stringify(results));
+        }
+
+        // Fortificações para uso em totem (touch/kiosk)
+        function setupKioskGuards() {
+            // Desativa menu de contexto
+            document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, { passive: false });
+            // Bloqueia pinch-zoom (gesture) em navegadores WebKit/Chromium
+            window.addEventListener('gesturestart', function(e) { e.preventDefault(); }, { passive: false });
+            window.addEventListener('gesturechange', function(e) { e.preventDefault(); }, { passive: false });
+            window.addEventListener('gestureend', function(e) { e.preventDefault(); }, { passive: false });
+            // Bloqueia zoom por scroll com Ctrl
+            window.addEventListener('wheel', function(e) {
+                if (e.ctrlKey) e.preventDefault();
+            }, { passive: false });
+            // Evita arrasto de imagens/elementos
+            document.querySelectorAll('img, a, button, .option').forEach(function(el) {
+                el.setAttribute('draggable', 'false');
+            });
+            // Reduz chance de double-tap zoom em alguns UAs antigos
+            let lastTouchTime = 0;
+            document.addEventListener('touchend', function(e) {
+                const now = Date.now();
+                if (now - lastTouchTime < 350) {
+                    e.preventDefault();
+                }
+                lastTouchTime = now;
+            }, { passive: false });
         }
 
         initQuiz();
