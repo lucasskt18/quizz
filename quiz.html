@@ -258,6 +258,108 @@
             margin-bottom: 20px;
         }
 
+        .steps {
+            text-align: left;
+            margin: 0 auto 28px auto;
+            max-width: 860px;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+            border: 1px solid rgba(118, 75, 162, 0.18);
+            border-radius: 18px;
+            padding: 18px 22px 20px 22px;
+            box-shadow: 0 12px 40px rgba(44, 19, 87, 0.08);
+            position: relative;
+        }
+        .steps:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.55), rgba(118,75,162,0.55));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .steps-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .steps-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(118, 75, 162, 0.35);
+            font-weight: 700;
+        }
+        .steps-title {
+            font-size: 22px;
+            color: #4a4793;
+            font-weight: 700;
+        }
+        .steps-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            font-size: 18px;
+            color: #2d2d2d;
+            margin: 0;
+            padding: 0;
+        }
+        .steps-item {
+            display: grid;
+            grid-template-columns: 38px 1fr;
+            align-items: start;
+            gap: 12px;
+        }
+        .steps-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #eef0ff;
+            border: 1px solid #d8dbff;
+            color: #4a4793;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+        .handle {
+            display: inline-block;
+            background: #eef0ff;
+            border: 1px solid #d8dbff;
+            color: #3b3a8f;
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-right: 6px;
+            transition: all .2s ease;
+        }
+        .handle:not(.no-link):hover {
+            background: #e2e6ff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(102,126,234,0.25);
+        }
+        .handle.no-link {
+            pointer-events: none;
+            cursor: default;
+        }
+        .steps-note {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6b6b6b;
+        }
+
         .start-description {
             font-size: 20px;
             color: #666;
@@ -282,9 +384,7 @@
             50% { opacity: 0.5; }
         }
         
-        /* === KIOSK / LARGE DISPLAY SCALING LAYER === */
         :root {
-            /* Base scale uses the smaller viewport edge; tuned for big screens */
             --scale: clamp(14px, 1.2vmin + 0.6vw, 24px);
             --container-max: min(92vw, 1400px);
         }
@@ -502,15 +602,33 @@
                         <img src="assets/WhatsApp Image 2025-10-26 at 09.18.04_fd777bb4.jpg" alt="Logo" class="logo" />
                     </div>
                     <h1 class="start-title">📖 Quiz: Mulheres na Bíblia</h1>
-                    <p class="start-description">
-                        Descubra e teste seus conhecimentos sobre as mulheres corajosas<br>
-                        e inspiradoras que fizeram história na Bíblia!<br><br>
-                        Você terá ${questions.length} perguntas sobre fé, coragem e fidelidade.<br>
-                        Responda com atenção e boa sorte! 🍀
-                    </p>
-                    <button class="btn btn-primary" onclick="startQuiz()">
-                        Iniciar Quiz
-                    </button>
+                    <div class="steps">
+                        <div class="steps-header">
+                            <div class="steps-icon">✓</div>
+                            <div class="steps-title">Antes de iniciar, siga estes passos</div>
+                        </div>
+                        <ul class="steps-list">
+                            <li class="steps-item">
+                                <div class="steps-num">1</div>
+                                <div>
+                                    Siga os três perfis:
+                                    <span class="handle no-link">@yisakhar</span>
+                                    <span class="handle no-link">@alessandrabatista.lmp</span>
+                                    <span class="handle no-link">@crearemarketingbrasil</span>
+                                </div>
+                            </li>
+                            <li class="steps-item">
+                                <div class="steps-num">2</div>
+                                <div>Agora tire uma foto 📸 mostrando o totem e marque os três perfis que você acabou de seguir.</div>
+                            </li>
+                            <li class="steps-item">
+                                <div class="steps-num">3</div>
+                                <div>Vamos lá? As mulheres na Bíblia foram protagonistas de histórias incríveis — vamos testar seus conhecimentos!</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="start-description">Tudo pronto? <strong>clique aqui para iniciar</strong>.</p>
+                    <button class="btn btn-primary" onclick="startQuiz()">Iniciar Quiz</button>
                 </div>
             `;
         }
