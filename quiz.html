@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@
         .quiz-container {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 1000px;
             width: 100%;
             padding: 40px 50px;
@@ -39,6 +40,7 @@
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 2px solid #f0f0f0;
+            position: relative;
         }
 
         .quiz-header-logo {
@@ -52,6 +54,34 @@
 
         .quiz-header-logo:hover {
             transform: scale(1.02);
+        }
+
+        .btn-reset {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .btn-reset:hover {
+            background: #f0f0ff;
+            border-color: #764ba2;
+            color: #764ba2;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .btn-reset:active {
+            transform: translateY(-50%) scale(0.95);
         }
 
         .results-screen .quiz-header {
@@ -194,6 +224,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -269,25 +300,28 @@
             box-shadow: 0 12px 40px rgba(44, 19, 87, 0.08);
             position: relative;
         }
+
         .steps:before {
             content: "";
             position: absolute;
             inset: 0;
             border-radius: 18px;
             padding: 1px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.55), rgba(118,75,162,0.55));
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.55), rgba(118, 75, 162, 0.55));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
         }
+
         .steps-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 14px;
         }
+
         .steps-icon {
             display: inline-flex;
             align-items: center;
@@ -300,11 +334,13 @@
             box-shadow: 0 6px 16px rgba(118, 75, 162, 0.35);
             font-weight: 700;
         }
+
         .steps-title {
             font-size: 22px;
             color: #4a4793;
             font-weight: 700;
         }
+
         .steps-list {
             list-style: none;
             display: flex;
@@ -315,12 +351,14 @@
             margin: 0;
             padding: 0;
         }
+
         .steps-item {
             display: grid;
             grid-template-columns: 38px 1fr;
             align-items: start;
             gap: 12px;
         }
+
         .steps-num {
             width: 38px;
             height: 38px;
@@ -333,6 +371,7 @@
             justify-content: center;
             font-weight: 800;
         }
+
         .handle {
             display: inline-block;
             background: #eef0ff;
@@ -345,15 +384,18 @@
             margin-right: 6px;
             transition: all .2s ease;
         }
+
         .handle:not(.no-link):hover {
             background: #e2e6ff;
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(102,126,234,0.25);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
         }
+
         .handle.no-link {
             pointer-events: none;
             cursor: default;
         }
+
         .steps-note {
             margin-top: 10px;
             font-size: 14px;
@@ -380,16 +422,24 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
-        
+
         :root {
             --scale: clamp(14px, 1.2vmin + 0.6vw, 24px);
             --container-max: min(92vw, 1400px);
         }
 
-        html, body {
+        html,
+        body {
             font-size: var(--scale);
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -412,12 +462,21 @@
             max-height: clamp(80px, 12vmin, 180px);
         }
 
-        .progress-bar { height: clamp(8px, 1vmin, 14px); }
+        .progress-bar {
+            height: clamp(8px, 1vmin, 14px);
+        }
 
-        .question-number { font-size: clamp(1rem, 2.2vmin, 1.4rem); }
-        .question-text { font-size: clamp(1.4rem, 3.2vmin, 2.4rem); }
+        .question-number {
+            font-size: clamp(1rem, 2.2vmin, 1.4rem);
+        }
 
-        .options { gap: clamp(0.75rem, 2vmin, 1.5rem); }
+        .question-text {
+            font-size: clamp(1.4rem, 3.2vmin, 2.4rem);
+        }
+
+        .options {
+            gap: clamp(0.75rem, 2vmin, 1.5rem);
+        }
 
         .option {
             font-size: clamp(1rem, 2.5vmin, 1.5rem);
@@ -427,7 +486,9 @@
             border-radius: clamp(10px, 1.4vmin, 16px);
         }
 
-        .navigation { margin-top: clamp(1rem, 2.5vmin, 2rem); }
+        .navigation {
+            margin-top: clamp(1rem, 2.5vmin, 2rem);
+        }
 
         .btn {
             font-size: clamp(1rem, 2.6vmin, 1.5rem);
@@ -437,27 +498,215 @@
             border-radius: clamp(10px, 1.2vmin, 14px);
         }
 
-        .results-title { font-size: clamp(1.6rem, 3.4vmin, 2.4rem); }
-        .score { font-size: clamp(2.5rem, 8vmin, 5rem); }
-        .score-text { font-size: clamp(1.1rem, 2.6vmin, 1.6rem); }
+        .results-title {
+            font-size: clamp(1.6rem, 3.4vmin, 2.4rem);
+        }
+
+        .score {
+            font-size: clamp(2.5rem, 8vmin, 5rem);
+        }
+
+        .score-text {
+            font-size: clamp(1.1rem, 2.6vmin, 1.6rem);
+        }
+
         .message {
             font-size: clamp(1rem, 2.2vmin, 1.25rem);
             padding: clamp(0.8rem, 2vmin, 1.4rem);
         }
 
-        .start-title { font-size: clamp(1.8rem, 4.2vmin, 3rem); }
-        .start-description { font-size: clamp(1rem, 2.4vmin, 1.25rem); }
-        .timer { font-size: clamp(1rem, 2.6vmin, 1.5rem); }
+        .start-title {
+            font-size: clamp(1.8rem, 4.2vmin, 3rem);
+        }
+
+        .start-description {
+            font-size: clamp(1rem, 2.4vmin, 1.25rem);
+        }
+
+        .timer {
+            font-size: clamp(1rem, 2.6vmin, 1.5rem);
+        }
+
+        .btn-reset {
+            font-size: clamp(0.75rem, 1.8vmin, 0.9rem);
+            padding: clamp(0.5rem, 1.2vmin, 0.7rem) clamp(0.8rem, 2vmin, 1.3rem);
+        }
 
         @media (orientation: portrait) {
-            .quiz-container { max-width: 96vw; min-height: 88vh; }
-            .options { gap: clamp(0.75rem, 3vmin, 2rem); }
+            .quiz-container {
+                max-width: 96vw;
+                min-height: 88vh;
+            }
+
+            .options {
+                gap: clamp(0.75rem, 3vmin, 2rem);
+            }
+
+            .btn-reset {
+                position: static;
+                transform: none;
+                margin-top: 10px;
+                width: 100%;
+            }
         }
-        img { -webkit-user-drag: none; }
+
+        @media (max-width: 600px) {
+            .quiz-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-reset {
+                position: static;
+                transform: none;
+                margin-top: 0;
+                width: auto;
+            }
+        }
+
+        /* Modal de Confirmação */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-title {
+            font-size: 28px;
+            color: #764ba2;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modal-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 15px 35px;
+            min-height: 50px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            min-width: 120px;
+        }
+
+        .modal-btn-cancel {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e0e0e0;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-confirm {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            .modal {
+                padding: 30px 20px;
+            }
+
+            .modal-title {
+                font-size: clamp(1.4rem, 4vmin, 1.8rem);
+            }
+
+            .modal-message {
+                font-size: clamp(1rem, 2.4vmin, 1.15rem);
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                width: 100%;
+                font-size: clamp(1rem, 2.4vmin, 1.15rem);
+            }
+        }
+
+        img {
+            -webkit-user-drag: none;
+        }
     </style>
 </head>
+
 <body>
     <div class="quiz-container" id="quizContainer">
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal-overlay" id="resetModal">
+        <div class="modal">
+            <h2 class="modal-title">⚠️ Reiniciar Quiz</h2>
+            <p class="modal-message">Tem certeza que deseja reiniciar o quiz? Todo o progresso será perdido.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeResetModal()">Cancelar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmReset()">Sim, Reiniciar</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -595,6 +844,7 @@
             setupPreviewIfRequested();
             showStartScreen();
             setupKioskGuards();
+            setupModalClose();
         }
 
         function showStartScreen() {
@@ -642,6 +892,41 @@
             showQuestion();
         }
 
+        function resetQuiz() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.add('show');
+        }
+
+        function closeResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.remove('show');
+        }
+
+        function confirmReset() {
+            currentQuestion = 0;
+            answers = [];
+            const container = document.getElementById('quizContainer');
+            container.classList.remove('results-screen');
+            closeResetModal();
+            showStartScreen();
+        }
+
+        // Fechar modal ao clicar no overlay (fora do modal)
+        function setupModalClose() {
+            const modal = document.getElementById('resetModal');
+            if (modal && !modal.hasAttribute('data-listener-added')) {
+                modal.addEventListener('click', function (e) {
+                    if (e.target === modal) {
+                        closeResetModal();
+                    }
+                });
+                modal.setAttribute('data-listener-added', 'true');
+            }
+        }
+
+        // Configurar o modal quando a página carregar
+        document.addEventListener('DOMContentLoaded', setupModalClose);
+
         function showQuestion() {
             const question = questions[currentQuestion];
             const progress = ((currentQuestion + 1) / questions.length) * 100;
@@ -652,6 +937,9 @@
             container.innerHTML = `
                 <div class="quiz-header">
                     <img src="assets/WhatsApp Image 2025-10-26 at 09.18.04_fd777bb4.jpg" alt="Logo" class="quiz-header-logo" />
+                    <button class="btn-reset" onclick="resetQuiz()" title="Reiniciar quiz">
+                        ↻ Reiniciar
+                    </button>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: ${progress}%"></div>
@@ -678,7 +966,7 @@
 
         function selectOption(index) {
             answers[currentQuestion] = index;
-            
+
             const options = document.querySelectorAll('.option');
             options.forEach((opt, i) => {
                 if (i === index) {
@@ -720,7 +1008,7 @@
         function showResults() {
             const score = calculateScore();
             const percentage = Math.round((score / questions.length) * 100);
-            
+
             let message = "";
             if (percentage === 100) {
                 message = "🎉 Parabéns você acertou tudo! Retire seu brinde na sala de recepção.";
@@ -763,33 +1051,35 @@
 
             let results = JSON.parse(localStorage.getItem('quizResults') || '[]');
             results.push(result);
-            
+
             if (results.length > 100) {
                 results = results.slice(-100);
             }
-            
+
             localStorage.setItem('quizResults', JSON.stringify(results));
         }
 
         // Fortificações para uso em totem (touch/kiosk)
         function setupKioskGuards() {
             // Desativa menu de contexto
-            document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, { passive: false });
+            document.addEventListener('contextmenu', function (e) { e.preventDefault(); }, { passive: false });
             // Bloqueia pinch-zoom (gesture) em navegadores WebKit/Chromium
-            window.addEventListener('gesturestart', function(e) { e.preventDefault(); }, { passive: false });
-            window.addEventListener('gesturechange', function(e) { e.preventDefault(); }, { passive: false });
-            window.addEventListener('gestureend', function(e) { e.preventDefault(); }, { passive: false });
+            window.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+            window.addEventListener('gesturechange', function (e) { e.preventDefault(); }, { passive: false });
+            window.addEventListener('gestureend', function (e) { e.preventDefault(); }, { passive: false });
             // Bloqueia zoom por scroll com Ctrl
-            window.addEventListener('wheel', function(e) {
+            window.addEventListener('wheel', function (e) {
                 if (e.ctrlKey) e.preventDefault();
             }, { passive: false });
-            // Evita arrasto de imagens/elementos
-            document.querySelectorAll('img, a, button, .option').forEach(function(el) {
-                el.setAttribute('draggable', 'false');
-            });
+            // Evita arrasto de imagens/elementos (será atualizado após renderizar)
+            setTimeout(function () {
+                document.querySelectorAll('img, a, button, .option').forEach(function (el) {
+                    el.setAttribute('draggable', 'false');
+                });
+            }, 100);
             // Reduz chance de double-tap zoom em alguns UAs antigos
             let lastTouchTime = 0;
-            document.addEventListener('touchend', function(e) {
+            document.addEventListener('touchend', function (e) {
                 const now = Date.now();
                 if (now - lastTouchTime < 350) {
                     e.preventDefault();
@@ -801,5 +1091,5 @@
         initQuiz();
     </script>
 </body>
-</html>
 
+</html>
