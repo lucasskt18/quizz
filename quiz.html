@@ -39,6 +39,7 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
+            padding-right: clamp(75px, 12vw, 100px);
             border-bottom: 2px solid #f0f0f0;
             position: relative;
         }
@@ -61,16 +62,18 @@
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            padding: 10px 20px;
+            padding: 6px 12px;
             background: #f8f9fa;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
             font-weight: 600;
             transition: all 0.3s ease;
             touch-action: manipulation;
+            white-space: nowrap;
+            max-width: 90px;
         }
 
         .btn-reset:hover {
@@ -528,8 +531,9 @@
         }
 
         .btn-reset {
-            font-size: clamp(0.75rem, 1.8vmin, 0.9rem);
-            padding: clamp(0.5rem, 1.2vmin, 0.7rem) clamp(0.8rem, 2vmin, 1.3rem);
+            font-size: clamp(10px, 1.2vmin, 12px);
+            padding: clamp(5px, 0.8vmin, 6px) clamp(8px, 1.5vmin, 12px);
+            max-width: clamp(70px, 12vmin, 90px);
         }
 
         @media (orientation: portrait) {
@@ -542,25 +546,33 @@
                 gap: clamp(0.75rem, 3vmin, 2rem);
             }
 
+            .quiz-header {
+                padding-right: clamp(65px, 10vw, 85px);
+            }
+
             .btn-reset {
-                position: static;
-                transform: none;
-                margin-top: 10px;
-                width: 100%;
+                position: absolute;
+                transform: translateY(-50%);
+                padding: 5px 10px;
+                font-size: 11px;
+                max-width: 80px;
+                right: 0;
             }
         }
 
         @media (max-width: 600px) {
             .quiz-header {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
+                padding-right: clamp(60px, 9vw, 75px);
             }
 
             .btn-reset {
-                position: static;
-                transform: none;
-                margin-top: 0;
-                width: auto;
+                position: absolute;
+                transform: translateY(-50%);
+                padding: 5px 8px;
+                font-size: 10px;
+                max-width: 70px;
+                right: 0;
             }
         }
 
